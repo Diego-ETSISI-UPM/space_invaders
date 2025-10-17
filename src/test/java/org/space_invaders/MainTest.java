@@ -23,7 +23,30 @@ class MainTest {
     }
 
     @Test
-    void crearAlienPosicCorrecta(){
+    void testInitBomb() {
+        // Coordenadas iniciales del Alien
+        int posX = 10;
+        int posY = 20;
+
+        // Creamos el Alien
+        Alien alien = new Alien(posX, posY);
+
+        // Obtenemos la bomba
+        Alien.Bomb bomb = alien.getBomb();
+
+        // Comprobamos que la bomba existe
+        assertNotNull(bomb, "La bomba debería haberse creado al inicializar el alien.");
+
+        // Verificamos que la bomba está inicialmente marcada como destruida
+        assertTrue(bomb.isDestroyed(), "La bomba debería estar inicialmente destruida.");
+
+        // Comprobamos que la posición coincide
+        assertEquals(posX, bomb.getX(), "La coordenada X de la bomba debería coincidir con la del alien.");
+        assertEquals(posY, bomb.getY(), "La coordenada Y de la bomba debería coincidir con la del alien.");
+
+    }
+    @Test
+    void crearAlienPosCorrecta(){
         int posH = 10;
         int posV = 10;
         Alien alien = new Alien(posH, posV);
