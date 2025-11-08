@@ -1,6 +1,6 @@
-package org.space_invaders;
+package org.space_invaders.functional;
 
-import org.space_invaders.space_invaders.sprites.Alien;
+import org.space_invaders.sprites.Alien;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class InitAlienTests {

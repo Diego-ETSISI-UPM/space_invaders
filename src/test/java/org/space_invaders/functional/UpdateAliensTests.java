@@ -1,8 +1,8 @@
-package org.space_invaders;
+package org.space_invaders.functional;
 
 import org.space_invaders.main.Board;
 import org.space_invaders.main.Commons;
-import org.space_invaders.space_invaders.sprites.Alien;
+import org.space_invaders.sprites.Alien;
 
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,13 +12,9 @@ public class UpdateAliensTests {
     @org.junit.jupiter.params.ParameterizedTest
     @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
     void testUpdateAliensDerrota(boolean todoOK) {
-        assertEquals(testUpdateAliensDerrota(), todoOK, "derrota no termina el juego");
-    }
-
-    boolean testUpdateAliensDerrota() {
         Board board = new Board();
         List<Alien> aliens = board.getAliens();
-        boolean correcto = false;
+        boolean correcto = true;
         System.out.println("testUpdateAliensDerrota()");
         while (aliens.getLast().getY() <= Commons.GROUND + Commons.ALIEN_HEIGHT){
             board.update_aliens();
@@ -31,16 +27,12 @@ public class UpdateAliensTests {
             System.out.println("estado del juego = "+ board.isInGame());
             correcto = false;
         }
-        return correcto;
+        assertEquals(correcto, todoOK, "derrota no termina el juego");
     }
 
     @org.junit.jupiter.params.ParameterizedTest
     @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
     void testUpdateAliensBordeDCH(boolean todoOK) {
-        assertEquals(testUpdateAliensBordeDCH(), todoOK, "bordeDCH no funciona");
-    }
-
-    boolean testUpdateAliensBordeDCH(){
         boolean correcto = true;
         Board board = new Board();
         List<Alien> aliens = board.getAliens();
@@ -70,16 +62,12 @@ public class UpdateAliensTests {
             System.out.println("board.getDirection() = " + board.getDirection());
             correcto = false;
         }
-        return correcto;
+        assertEquals(correcto, todoOK, "bordeDCH no funciona");
     }
 
     @org.junit.jupiter.params.ParameterizedTest
     @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
     void testUpdateAliensBordeIZQ(boolean todoOK) {
-        assertEquals(testUpdateAliensBordeIZQ(), todoOK, "bordeIZQ no funciona");
-    }
-
-    boolean testUpdateAliensBordeIZQ(){
         boolean correcto = true;
         Board board = new Board();
         int posY = 0;
@@ -110,16 +98,12 @@ public class UpdateAliensTests {
             System.out.println("board.getDirection() = " + board.getDirection());
             correcto = false;
         }
-        return correcto;
+        assertEquals(correcto, todoOK, "bordeIZQ no funciona");
     }
 
     @org.junit.jupiter.params.ParameterizedTest
     @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
     void testUpdateAliensNormalDCH(boolean todoOK) {
-        assertEquals(testUpdateAliensNormalDCH(), todoOK, "normalDCH no funciona");
-    }
-
-    boolean testUpdateAliensNormalDCH(){
         boolean correcto = true;
         Board board = new Board();
         board.update_aliens();
@@ -130,16 +114,12 @@ public class UpdateAliensTests {
             System.out.println("aliens.getFirst().getX() = " + aliens.getFirst().getX() + ", posX + 1 = " + (posX + 1));
             correcto = false;
         }
-        return correcto;
+        assertEquals(correcto, todoOK, "normalDCH no funciona");
     }
 
     @org.junit.jupiter.params.ParameterizedTest
     @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
     void testUpdateAliensNormalIZQ(boolean todoOK) {
-        assertEquals(testUpdateAliensNormalIZQ(), todoOK, "normalIZQ no funciona");
-    }
-
-    boolean testUpdateAliensNormalIZQ(){
         boolean correcto = true;
         Board board = new Board();
         board.update_aliens();
@@ -152,7 +132,7 @@ public class UpdateAliensTests {
             System.out.println("aliens.getFirst().getX() = " + aliens.getFirst().getX() + ", posX - 1 = " + (posX - 1));
             correcto = false;
         }
-        return correcto;
+        assertEquals(correcto, todoOK, "normalIZQ no funciona");
     }
 
 }
