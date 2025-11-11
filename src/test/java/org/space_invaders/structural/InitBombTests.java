@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InitBombTests {
     @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
+    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/True.csv")
     void testCamino1(boolean todoOK) {
         assertEquals(probarPos(Commons.BOARD_WIDTH + 1, Commons.BOARD_HEIGHT + 1), todoOK, "no se recorrido el camino 1");
     }
 
     @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
+    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/True.csv")
     void testCamino2(boolean todoOK) {
         assertEquals(probarPos(Commons.BOARD_WIDTH - 1, Commons.BOARD_HEIGHT + 1), todoOK, "no se recorrido el camino 2");
     }
