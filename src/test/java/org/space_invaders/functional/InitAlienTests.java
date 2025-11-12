@@ -1,7 +1,7 @@
 package org.space_invaders.functional;
 
 import org.space_invaders.sprites.Alien;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InitAlienTests {
     @org.junit.jupiter.params.ParameterizedTest

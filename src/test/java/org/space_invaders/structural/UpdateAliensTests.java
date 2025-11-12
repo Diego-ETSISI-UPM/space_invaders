@@ -3,13 +3,13 @@ package org.space_invaders.structural;
 import org.space_invaders.main.Board;
 import org.space_invaders.main.Commons;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UpdateAliensTests {
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/True.csv")
-    void updateAliensCamino4(boolean todoOK) {
+    @Test
+    void updateAliensCamino4() {
         System.out.println("\nupdateAliensCamino4()");
         boolean resultado = false;
         Board board = new Board();
@@ -27,12 +27,11 @@ public class UpdateAliensTests {
         System.out.println("movimiento: " + contador + ", direction = " + board.getDirection());
         printAliens("situación final:", board);
         if (board.getAliens().getFirst().getY() > y) resultado = true;
-        assertEquals(todoOK, resultado, "mensaje de error");
+        assertTrue(resultado, "mensaje de error");
     }
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/True.csv")
-    void updateAliensCamino6(boolean todoOK) {
+    @Test
+    void updateAliensCamino6() {
         System.out.println("\nupdateAliensCamino6()");
         boolean resultado = false;
         Board board = new Board();
@@ -55,12 +54,11 @@ public class UpdateAliensTests {
         System.out.println("movimiento: " + contador + ", direction = " + board.getDirection());
         printAliens("situación final:", board);
         if (board.getAliens().getFirst().getY() > y) resultado = true;
-        assertEquals(todoOK, resultado, "mensaje de error, recuerda board.setDirection();");
+        assertTrue(resultado, "mensaje de error, recuerda board.setDirection();");
     }
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/True.csv")
-    void updateAliensCamino8(boolean todoOK) {
+    @Test
+    void updateAliensCamino8() {
         System.out.println("\nupdateAliensCamino8()");
         boolean resultado = false;
         Board board = new Board();
@@ -72,13 +70,12 @@ public class UpdateAliensTests {
         resultado = true;
         System.out.println("isVisible() = " + board.getAliens().getFirst().isVisible()
                 + ", isInGame() = " + board.isInGame());
-        assertEquals(todoOK, resultado, "mensaje de error, recuerda board.setDirection();");
+        assertTrue(resultado, "mensaje de error, recuerda board.setDirection();");
     }
 
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/True.csv")
-    void updateAliensCamino9(boolean todoOK) {
+    @Test
+    void updateAliensCamino9() {
         System.out.println("\nupdateAliensCamino9()");
         boolean resultado = false;
         Board board = new Board();
@@ -97,7 +94,7 @@ public class UpdateAliensTests {
         resultado = true;
         System.out.println("isVisible() = " + board.getAliens().getFirst().isVisible()
                 + ", isInGame() = " + board.isInGame());
-        assertEquals(todoOK, resultado, "mensaje de error");
+        assertTrue(resultado, "mensaje de error");
     }
 
 

@@ -2,137 +2,154 @@ package org.space_invaders.functional;
 
 import org.space_invaders.main.Board;
 import org.space_invaders.main.Commons;
-import org.space_invaders.sprites.Alien;
 
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UpdateAliensTests {
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
-    void testUpdateAliensDerrota(boolean todoOK) {
-        Board board = new Board();
-        List<Alien> aliens = board.getAliens();
-        boolean correcto = true;
-        System.out.println("testUpdateAliensDerrota()");
-        while (aliens.getLast().getY() <= Commons.GROUND + Commons.ALIEN_HEIGHT){
+    private Board board;
+    private boolean correcto;
+    int posX;
+    int posY;
+
+    @BeforeEach
+    void setUp() {
+        board = new Board();
+        correcto = true;
+        posX = 0;
+        posY = 0;
+    }
+
+    @Test
+    void testUpdateAliensDerrota() {
+        System.out.println("\ntestUpdateAliensDerrota()");
+        printAliens("situación inicial", board);
+        while (board.getAliens().getLast().getY() <= Commons.GROUND - Commons.ALIEN_HEIGHT){
             board.update_aliens();
         }
-        if (aliens.getLast().getY() >= Commons.GROUND + Commons.ALIEN_HEIGHT) {
-            System.out.println("derrotaY = " + (Commons.GROUND + Commons.ALIEN_HEIGHT) + ", posY = " + aliens.getLast().getY());
+        printAliens("situación final", board);
+        if (board.getAliens().getLast().getY() >= Commons.GROUND - Commons.ALIEN_HEIGHT) {
+            System.out.println("derrotaY = " + (Commons.GROUND - Commons.ALIEN_HEIGHT) + ", posY = " + board.getAliens().getLast().getY());
             correcto = false;
         }
         if (board.isInGame()) {
             System.out.println("estado del juego = "+ board.isInGame());
             correcto = false;
         }
-        assertEquals(correcto, todoOK, "derrota no termina el juego");
+        assertTrue(correcto,"derrota no termina el juego");
     }
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
-    void testUpdateAliensBordeDCH(boolean todoOK) {
-        boolean correcto = true;
-        Board board = new Board();
-        List<Alien> aliens = board.getAliens();
-        int posX = 0;
-        int posY = 0;
+    @Test
+    void testUpdateAliensBordeDCH() {
         System.out.println("testUpdateAliensBordeDCH()");
-        while (aliens.getLast().getX() <= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT){
-            if (aliens.getLast().getX() == Commons.BOARD_WIDTH - Commons.BORDER_RIGHT) {
-                posY = aliens.getLast().getY();
-                posX = aliens.getLast().getX();
+        printAliens("situación inicial", board);
+        while (board.getAliens().getLast().getX() <= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT){
+            if (board.getAliens().getLast().getX() == Commons.BOARD_WIDTH - Commons.BORDER_RIGHT) {
+                posY = board.getAliens().getLast().getY();
+                posX = board.getAliens().getLast().getX();
             }
             board.update_aliens();
         }
-        if (aliens.getLast().getX() >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT) {
-            System.out.println("borde DCH = " + (Commons.BOARD_WIDTH - Commons.BORDER_RIGHT) + ", posX = " + aliens.getLast().getX());
+        printAliens("situación final", board);
+        if (board.getAliens().getLast().getX() >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT) {
+            System.out.println("borde DCH = " + (Commons.BOARD_WIDTH - Commons.BORDER_RIGHT) + ", posX = " + board.getAliens().getLast().getX());
             correcto = false;
         }
-        if (aliens.getLast().getX() != posX - 1) {
-            System.out.println("aliens.getLast().getX() = " + aliens.getLast().getX() + ", posX = " + posX);
+        if (board.getAliens().getLast().getX() != posX) {
+            System.out.println("board.getAliens().getLast().getX() = " + board.getAliens().getLast().getX() + ", posX = " + posX);
             correcto = false;
         }
-        if (aliens.getLast().getY() != posY + Commons.GO_DOWN) {
-            System.out.println("posY + Commons.GO_DOWN = " + (posY + Commons.GO_DOWN) + ", posY = " + aliens.getLast().getY());
+        if (board.getAliens().getLast().getY() != posY + Commons.GO_DOWN) {
+            System.out.println("posY + Commons.GO_DOWN = " + (posY + Commons.GO_DOWN) + ", posY = " + board.getAliens().getLast().getY());
             correcto = false;
         }
         if (board.getDirection() == 1){
             System.out.println("board.getDirection() = " + board.getDirection());
             correcto = false;
         }
-        assertEquals(correcto, todoOK, "bordeDCH no funciona");
+        assertTrue(correcto,"bordeDCH no funciona");
     }
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
-    void testUpdateAliensBordeIZQ(boolean todoOK) {
-        boolean correcto = true;
-        Board board = new Board();
-        int posY = 0;
-        int posX = 0;
+    @Test
+    void testUpdateAliensBordeIZQ() {
+        System.out.println("testUpdateAliensBordeIZQ()");
         board.setDirection(1);
         // @TODO setDirection tiene lógica inversa!
-        List<Alien> aliens = board.getAliens();
-        while (aliens.getFirst().getX() >= Commons.BORDER_LEFT){
-            if (aliens.getFirst().getX() == Commons.BORDER_LEFT) {
-                posY = aliens.getLast().getY();
-                posX = aliens.getFirst().getX();
+        printAliens("situación inicial", board);
+        while (board.getAliens().getFirst().getX() >= Commons.BORDER_LEFT){
+            if (board.getAliens().getFirst().getX() == Commons.BORDER_LEFT) {
+                posY = board.getAliens().getLast().getY();
+                posX = board.getAliens().getFirst().getX();
             }
             board.update_aliens();
         }
-        if (Commons.BORDER_LEFT > aliens.getFirst().getX()) {
+        printAliens("situación final", board);
+        if (Commons.BORDER_LEFT > board.getAliens().getFirst().getX()) {
             correcto = false;
-            System.out.println("borde IZQ = " + Commons.BORDER_LEFT + ", posX = " + posX);
+            System.out.println("borde IZQ = " + Commons.BORDER_LEFT + ", posX = " + board.getAliens().getFirst().getX());
         }
-        if (aliens.getFirst().getX() != posX + 1) {
-            System.out.println("aliens.getFirst().getX() = " + aliens.getFirst().getX() + ", posX + 1 = " + (posX + 1));
+        if (board.getAliens().getFirst().getX() != posX) {
+            System.out.println("board.getAliens().getFirst().getX() = " + board.getAliens().getFirst().getX() + ", anteriorX = " + posX);
             correcto = false;
         }
-        if (aliens.getLast().getY() != posY + Commons.GO_DOWN) {
+        if (board.getAliens().getLast().getY() != posY + Commons.GO_DOWN) {
             correcto = false;
-            System.out.println("altura antes del borde = " + posY + ", después = " + aliens.getLast().getY());
+            System.out.println("altura antes del borde = " + posY + ", después = " + board.getAliens().getLast().getY());
         }
         if (board.getDirection() == -1){
             System.out.println("board.getDirection() = " + board.getDirection());
             correcto = false;
         }
-        assertEquals(correcto, todoOK, "bordeIZQ no funciona");
+        assertTrue(correcto,"bordeIZQ no funciona");
     }
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
-    void testUpdateAliensNormalDCH(boolean todoOK) {
-        boolean correcto = true;
-        Board board = new Board();
+    @Test
+    void testUpdateAliensNormalDCH() {
+        System.out.println("testUpdateAliensNormalDCH()");
+        printAliens("situación inicial", board);
+        posX = board.getAliens().getFirst().getX();
         board.update_aliens();
-        List<Alien> aliens = board.getAliens();
-        int posX = aliens.getFirst().getX();
-        board.update_aliens();
-        if (aliens.getFirst().getX() != posX + 1) {
-            System.out.println("aliens.getFirst().getX() = " + aliens.getFirst().getX() + ", posX + 1 = " + (posX + 1));
+        printAliens("situación final", board);
+        if (board.getAliens().getFirst().getX() != posX + 1) {
+            System.out.println("board.getAliens().getFirst().getX() = " + board.getAliens().getFirst().getX() + ", posX + 1 = " + (posX + 1));
             correcto = false;
         }
-        assertEquals(correcto, todoOK, "normalDCH no funciona");
+        assertTrue(correcto,"normalDCH no funciona");
     }
 
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.CsvFileSource(resources = "/UpdateAliensCases.csv")
-    void testUpdateAliensNormalIZQ(boolean todoOK) {
-        boolean correcto = true;
-        Board board = new Board();
-        board.update_aliens();
-        board.setDirection(-1);
+    @Test
+    void testUpdateAliensNormalIZQ() {
+        System.out.println("testUpdateAliensNormalIZQ()");
+        board.setDirection(1);
         // @TODO setDirection tiene lógica inversa!
+        posX = board.getAliens().getFirst().getX();
+        printAliens("situación inicial", board);
         board.update_aliens();
-        List<Alien> aliens = board.getAliens();
-        int posX = aliens.getFirst().getX();
-        if (aliens.getFirst().getX() != posX - 1) {
-            System.out.println("aliens.getFirst().getX() = " + aliens.getFirst().getX() + ", posX - 1 = " + (posX - 1));
+        printAliens("situación final", board);
+        if ( board.getAliens().getFirst().getX() + 1 != posX ) {
+            System.out.println("board.getAliens().getFirst().getX() = " + board.getAliens().getFirst().getX() + ", anterior = " + posX);
             correcto = false;
         }
-        assertEquals(correcto, todoOK, "normalIZQ no funciona");
+        assertTrue(correcto,"normalIZQ no funciona");
+    }
+
+    void printAliens(String mensaje, Board board) {
+        System.out.println(mensaje);
+        System.out.println(
+                "firstAlien: pos = (" + board.getAliens().getFirst().getX()
+                        + "," + board.getAliens().getFirst().getY()
+                        + "), isVisible = " + board.getAliens().getFirst().isVisible()
+                        + ", isDying = " + board.getAliens().getFirst().isDying() + " "
+        );
+        System.out.println(
+                "LastAlien: pos = (" + board.getAliens().getLast().getX()
+                        + "," + board.getAliens().getLast().getY()
+                        + "), isVisible = " + board.getAliens().getLast().isVisible()
+                        + ", isDying = " + board.getAliens().getLast().isDying() + " "
+        );
+
     }
 
 }
