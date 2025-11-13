@@ -2,7 +2,7 @@ package org.space_invaders.functional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.space_invaders.space_invaders.sprites.Alien;
+import org.space_invaders.sprites.Alien;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ActAlienTest {
@@ -17,20 +17,29 @@ public class ActAlienTest {
     }
     @Test
     void actAlienMovimientoIzq(){
-        alien.act(5);
+        System.out.println(" actAlienMovimientoIzq()");
+        System.out.println("antes, alien.getX() = " + alien.getX());
+        alien.act(-5);
+        System.out.println("después, alien.getX() = " + alien.getX());
         assertEquals(165, alien.getX(), "El alien deberia moverse 5 unidades a la izquierda");
     }
 
     @Test
     void actAlienMovimientoDrch(){
+        System.out.println("actAlienMovimientoDrch()");
+        System.out.println("antes, alien.getX() = " + alien.getX());
         alien.act(5);
+        System.out.println("después, alien.getX() = " + alien.getX());
         assertEquals(175, alien.getX(), "El alien deberia moverse 5 unidades a la derecha");
     }
 
     @Test
     void actAlienSinMovimiento(){
+        System.out.println("actAlienSinMovimiento()");
+        System.out.println("antes, alien.getX() = " + alien.getX());
         alien.act(0);
-        assertEquals(175, alien.getX(), "El alien no deberia moverse");
+        System.out.println("después, alien.getX() = " + alien.getX());
+        assertEquals(170, alien.getX(), "El alien no deberia moverse");
     }
 
 }
