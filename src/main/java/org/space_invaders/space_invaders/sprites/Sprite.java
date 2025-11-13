@@ -36,7 +36,7 @@ public abstract class Sprite {
         return visible;
     }
 
-    protected void setVisible(boolean visible) {
+    public void setVisible(boolean visible) {
 
         this.visible = visible;
     }
@@ -79,5 +79,13 @@ public abstract class Sprite {
     public boolean isDying() {
 
         return this.dying;
+    }
+
+    public int getDx(){
+        return dx;
+    }
+
+    public void setDx(int dx){
+        this.dx = dx;
     }
 }
