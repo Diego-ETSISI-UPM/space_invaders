@@ -1,4 +1,4 @@
-package org.space_invaders;
+package org.space_invaders.functional;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
