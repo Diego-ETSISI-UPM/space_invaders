@@ -2,7 +2,7 @@ package org.space_invaders.functional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.space_invaders.sprites.Alien;
+import org.space_invaders.space_invaders.sprites.Alien;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ActAlienTest {

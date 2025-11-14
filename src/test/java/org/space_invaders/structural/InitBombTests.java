@@ -1,7 +1,7 @@
 package org.space_invaders.structural;
 
 import org.space_invaders.main.Commons;
-import org.space_invaders.sprites.Alien;
+import org.space_invaders.space_invaders.sprites.Alien;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -322,7 +322,7 @@ public class Board extends JPanel {
         }
     }
 
-    private void update_aliens(){
+    public void update_aliens(){
         for (Alien alien : this.aliens) {
 
             int x = alien.getX();
@@ -377,7 +377,7 @@ public class Board extends JPanel {
     }
 
 
-    private void update_bomb(){
+    public void update_bomb(){
         var generator = new Random();
 
         for (Alien alien : this.aliens) {

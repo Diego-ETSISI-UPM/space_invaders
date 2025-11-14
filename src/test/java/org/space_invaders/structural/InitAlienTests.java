@@ -1,6 +1,6 @@
 package org.space_invaders.structural;
 
-import org.space_invaders.sprites.Alien;
+import org.space_invaders.space_invaders.sprites.Alien;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
