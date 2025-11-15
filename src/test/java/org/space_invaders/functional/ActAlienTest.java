@@ -19,7 +19,7 @@ public class ActAlienTest {
     void actAlienMovimientoIzq(){
         System.out.println(" actAlienMovimientoIzq()");
         System.out.println("antes, alien.getX() = " + alien.getX());
-        alien.act(5);
+        alien.act(-5);
         System.out.println("después, alien.getX() = " + alien.getX());
         assertEquals(165, alien.getX(), "El alien deberia moverse 5 unidades a la izquierda");
     }
@@ -28,7 +28,7 @@ public class ActAlienTest {
     void actAlienMovimientoDrch(){
         System.out.println("actAlienMovimientoDrch()");
         System.out.println("antes, alien.getX() = " + alien.getX());
-        alien.act(-5);
+        alien.act(5);
         System.out.println("después, alien.getX() = " + alien.getX());
         assertEquals(175, alien.getX(), "El alien deberia moverse 5 unidades a la derecha");
     }
