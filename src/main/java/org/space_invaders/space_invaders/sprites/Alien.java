@@ -44,22 +44,30 @@ public class Alien extends Sprite {
      * y su posición es válida dentro del tablero de juego.</dd></dl>
      */
      public void initAlien(int x, int y) { //modificado el atributo de acceso private por public
-
-        if (x> Commons.BOARD_WIDTH){
-            this.x = Commons.BOARD_WIDTH;
+        //TODO EDIT1: se han movido/subido las dos líneas siguientes de código para evitar que las condiciones particulares sean sobreescritas
+         this.x = x;
+         this.y = y;
+        //TODO EDIT2.1: la condición de margen derecho se ha modificado añadiendo el ancho de la figura
+        if (x > Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH){
+            //TODO EDIT2.2: se ha añadido el ancho de la figura para que la asignación sea correcta
+            this.x = Commons.BOARD_WIDTH - Commons.ALIEN_WIDTH;
         } if (x<0){
             this.x = 0;
-        } if (y> Commons.BOARD_HEIGHT){
-            this.y = Commons.BOARD_HEIGHT;
+        }
+        //TODO EDIT3.1: la condición de la línea de tierra se ha modificado añadiendo el alto de la figura
+        if (y> Commons.BOARD_HEIGHT - Commons.ALIEN_HEIGHT){
+            //TODO EDIT3.2: se ha añadido el alto de la figura para que la asignación sea correcta
+            this.y = Commons.BOARD_HEIGHT -  Commons.ALIEN_HEIGHT;
         } if (y<0){
             this.y=0;
         }
+        /*
         else
         {
             this.x = x;
             this.y = y;
         }
-
+        */
         bomb = new Bomb(x, y);
 
         var alienImg = "src/main/resources/images/alien.png";
@@ -81,8 +89,8 @@ public class Alien extends Sprite {
      * según la dirección especificada.</dd></dl>
      */
     public void act(int direction) {
-
-        this.x -= direction;
+        //TODO EDIT4: se ha sustituido - por +
+        this.x += direction;
     }
 
     /**
@@ -129,7 +137,15 @@ public class Alien extends Sprite {
         public void initBomb(int x, int y) {
 
             setDestroyed(true);
+            //TODO EDIT7: función reescrita hasta 148
+            this.x = x;
+            this.y = y;
 
+            if (x<0) this.x = 0;
+            if (x> Commons.BOARD_WIDTH) this.x = Commons.BOARD_WIDTH;
+            if (y<0) this.y = 0;
+            if (y> Commons.BOARD_HEIGHT - Commons.BOMB_HEIGHT) this.y = Commons.BOARD_HEIGHT - Commons.BOMB_HEIGHT;
+            /*
             if (x<= Commons.BOARD_WIDTH && y<= Commons.BOARD_HEIGHT) {
                 this.x += x;
                 this.y += y;
@@ -138,7 +154,7 @@ public class Alien extends Sprite {
                 this.x = Commons.BOARD_WIDTH;
                 this.y = Commons.BOARD_HEIGHT;
             }
-
+            */
             var bombImg = "src/main/resources/images/bomb.png";
             var ii = new ImageIcon(bombImg);
             setImage(ii.getImage());
