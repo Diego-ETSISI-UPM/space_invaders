@@ -326,8 +326,8 @@ public class Board extends JPanel {
         for (Alien alien : this.aliens) {
 
             int x = alien.getX();
-
-            if (x >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT && direction == -1) {
+            //@TODO EDIT5.1: modificada la condición del valor de "direction" a 1, en lugar de -1
+            if (x >= Commons.BOARD_WIDTH - Commons.BORDER_RIGHT && direction == 1) {
 
                 direction = -1;
 
@@ -363,9 +363,10 @@ public class Board extends JPanel {
             if (alien.isVisible()) {
 
                 int y = alien.getY();
-
-                if (y > Commons.GROUND + Commons.ALIEN_HEIGHT) {
-                    inGame = true;
+                //TODO EDIT5.2: modificada el signo + por un - en la condición, para evitar sobrepasar el tablero
+                if (y > Commons.GROUND - Commons.ALIEN_HEIGHT) {
+                    //TODO EDIT6: modificada la asignación de binario "inGame" a "false" cuando se produce la invasión
+                    inGame = false;
                     message = "Invasion!";
                 }
 
