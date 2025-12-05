@@ -67,7 +67,7 @@ public class Player extends Sprite {
 
         if (x >= Commons.BOARD_WIDTH - 2 * width) {
 
-            x = Commons.BOARD_WIDTH + 2 * width;
+            x = Commons.BOARD_WIDTH - 2 * width;
         }
     }
 
