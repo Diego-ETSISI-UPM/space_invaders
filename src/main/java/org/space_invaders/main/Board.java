@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * {@summary Tablero principal del juego Space Invaders que gestiona la lógica del juego y la interfaz gráfica.}
@@ -52,6 +53,7 @@ public class Board extends JPanel {
     private String message = "Game Over";
 
     private Timer timer;
+    private static final Logger LOG = Logger.getLogger(Board.class.getName());
 
     /**
      * {@summary <span class="alert-small">⛔🧪</span> Obtiene el objeto jugador del tablero.}
@@ -277,10 +279,19 @@ public class Board extends JPanel {
         }
 
         // player
+        LOG.info("MSG player.act");
         this.player.act();
+
+        LOG.info("MSG update_shots");
         update_shots();
+
+        LOG.info("MSG update_aliens");
         update_aliens();
+
+        LOG.info("MSG update_bomb");
         update_bomb();
+
+        LOG.info("finalizado.");
     }
 
 
