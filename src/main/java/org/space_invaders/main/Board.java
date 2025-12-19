@@ -304,6 +304,8 @@ public class Board extends JPanel {
                         var ii = new ImageIcon(explImg);
                         alien.setImage(ii.getImage());
                         alien.setDying(true);
+                        alien.die();
+                        this.shot.die();
                         deaths++;
                         
                     }
@@ -311,13 +313,14 @@ public class Board extends JPanel {
             }
 
             int y = this.shot.getY();
+            int x = this.shot.getX();
             y -= Commons.SHOT_SPEED;
 
             if (y < 0) {
                 this.shot.die();
             } else {
                 this.shot.setY(y);
-                this.shot.setX(y);
+                this.shot.setX(x);
             }
         }
     }
@@ -476,7 +479,7 @@ public class Board extends JPanel {
 
                     if (!shot.isVisible()) {
 
-                        shot = new Shot(y, x);
+                        shot = new Shot(x, y);
                     }
                 }
             }
